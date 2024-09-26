@@ -1,6 +1,8 @@
 package be.pxl.controller;
 
 import be.pxl.domain.Employee;
+import be.pxl.domain.dto.EmployeeRequest;
+import be.pxl.domain.dto.EmployeeResponse;
 import be.pxl.service.IEmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +19,14 @@ public class EmployeeController {
     private final IEmployeeService employeeService;
 
     @PostMapping
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-        Employee createdEmployee = employeeService.addEmployee(employee);
-        return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addEmployee(@RequestBody EmployeeRequest employee) {
+        employeeService.addEmployee(employee);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
-        Employee employee = employeeService.getEmployeeById(id);
+    public ResponseEntity<EmployeeResponse> getEmployeeById(@PathVariable Long id) {
+        EmployeeResponse employee = employeeService.getEmployeeById(id);
         if (employee != null) {
             return new ResponseEntity<>(employee, HttpStatus.OK);
         } else {
@@ -35,15 +37,16 @@ public class EmployeeController {
     public ResponseEntity getEmployees() {
         return new ResponseEntity(employeeService.getEmployees(), HttpStatus.OK);
     }
+
     @GetMapping("/department/{departmentId}")
-    public ResponseEntity<List<Employee>> findByDepartment(@PathVariable Long departmentId) {
-        List<Employee> employees = employeeService.findByDepartment(departmentId);
+    public ResponseEntity findByDepartment(@PathVariable Long departmentId) {
+        List<EmployeeResponse> employees = employeeService.findByDepartment(departmentId);
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
     @GetMapping("/organization/{organizationId}")
-    public ResponseEntity<List<Employee>> findByOrganization(@PathVariable Long organizationId) {
-        List<Employee> employees = employeeService.findByOrganization(organizationId);
+    public ResponseEntity findByOrganization(@PathVariable Long organizationId) {
+        List<EmployeeResponse> employees = employeeService.findByOrganization(organizationId);
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
