@@ -2,13 +2,12 @@ package be.pxl.domain;
 
 
 import jakarta.persistence.*;
+import jakarta.transaction.TransactionScoped;
 import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
 @Table(name = "organization")
 @Data
 @Builder
@@ -20,8 +19,8 @@ public class Organization {
     private Long id;
     private String name;
     private String address;
-    @OneToMany
+    @Transient
     private List<Employee> employees;
-    @OneToMany
+    @Transient
     private List<Department> departments;
 }
