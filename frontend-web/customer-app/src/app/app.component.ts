@@ -15,8 +15,8 @@ import { CustomerListComponent } from './core/customers/customer-list/customer-l
 export class AppComponent {
   title = 'customer-app';
   constructor() {
-    const c1 = new Customer('Dries Swinnen', 'dries@d-ries.be','Pelt','mystreet','Belgium',21, '/public/test.JPG');
-    const c2 = new Customer('John Doe', 'john@doe.com','New York','5th Avenue','USA',6, '/public/test.JPG');
+    const c1 = new Customer('Dries Swinnen', 'dries@d-ries.be','Pelt','mystreet','Belgium',21);
+    const c2 = new Customer('John Doe', 'john@doe.com','New York','5th Avenue','USA',6);
     c2.isLoyal = true;
     
     console.log(c1);
