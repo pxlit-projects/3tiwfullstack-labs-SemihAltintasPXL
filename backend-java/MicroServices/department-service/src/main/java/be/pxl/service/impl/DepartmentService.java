@@ -18,7 +18,7 @@ public class DepartmentService implements IDepartmentService {
     public List<DepartmentResponse> getAllEmployees() {
         List <Department> departments = departmentRepository.findAll();
         return departments.stream()
-                .map(department -> mapToDepartmentResponse(department)).toList();
+                .map(this::mapToDepartmentResponse).toList();
     }
 
     @Override
@@ -43,14 +43,14 @@ public class DepartmentService implements IDepartmentService {
     public List<DepartmentResponse> getDepartmentsByOrganizationId(Long organizationId) {
         List <Department> departments = departmentRepository.findByOrganizationId(organizationId).stream().toList();
         return departments.stream()
-                .map(department -> mapToDepartmentResponseWithoutEmployees(department)).toList();
+                .map(this::mapToDepartmentResponseWithoutEmployees).toList();
     }
 
     @Override
     public List<DepartmentResponse> getDepartmentsByOrganizationIdWithEmployees(Long organizationId) {
         List <Department> departments = departmentRepository.findByOrganizationId(organizationId).stream().toList();
         return departments.stream()
-                .map(department -> mapToDepartmentResponse(department)).toList();
+                .map(this::mapToDepartmentResponse).toList();
     }
 
     private DepartmentResponse mapToDepartmentResponse(Department department) {
