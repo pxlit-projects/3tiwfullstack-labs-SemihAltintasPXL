@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NotificationResponse {
-    private String from;
-    private String to;
+public class NotificationRequest {
+    private String sender;
+    private String receiver;
     private String subject;
     private String message;
 }
